@@ -57,8 +57,7 @@ So, by default E1 stream is generated as PCM30 with double-frame continuosly.
 Build
 =====
 
-Just type 'make'.
-You have to install gcc to make it work ;)
+    $ make
 
 Examples
 ========
