@@ -76,4 +76,16 @@ Bytes are read cyclically: one byte to 1st timeslot, next byte to 5th timeslot a
 
     $ e1gen -t 1:/tmp/hdlc -t 5:/tmp/hdlc | some_program
 
- 
+Let's see 4 frames with 1st 3rd timeslots replaced by random values, 2nd - by zeroes
+and other - by 'silence' value (-S option):
+
+    $ e1gen -t 1:/dev/urandom -t 2:/dev/zero -t 3:/dev/urandom -S aa -n 4 | od -t x1
+    0000000    1b  55  00  44  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa
+    0000020    aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa
+    0000040    40  51  00  20  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa
+    0000060    aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa
+    0000100    1b  53  00  d7  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa
+    0000120    aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa
+    0000140    40  f3  00  88  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa
+    0000160    aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa  aa
+    0000200 
