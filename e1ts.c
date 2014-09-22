@@ -36,8 +36,9 @@ void e1_tx_timeslots_clear( void )
  */
 int e1_tx_timeslots_init( void )
 {
+  unsigned i = 0;
   // opening all files, if any
-  for ( unsigned i = 0; i < E1_TS_NUM; i++ ) { 
+  for ( i = 0; i < E1_TS_NUM; i++ ) { 
     e1_tx_timeslot_t *t = &gl_e1_tx_ts[ i ];
     t->num = i;
 
@@ -54,7 +55,8 @@ int e1_tx_timeslots_init( void )
         // and set 'file' to t->file value.
         // this is done for consequtive reading of same file
         // when it is used for some timeslots (more then one)
-        for ( unsigned j = i + 1; j < E1_TS_NUM; j ++ ) {
+        unsigned j = 0;
+        for ( j = i + 1; j < E1_TS_NUM; j ++ ) {
           e1_tx_timeslot_t *_t = &gl_e1_tx_ts[ j ];
           if ( _t->fname && ( strcmp( _t->fname, t->fname ) == 0 ) ) {
             _t->file = t->file;
@@ -65,7 +67,7 @@ int e1_tx_timeslots_init( void )
   }
 
   // assigning callbacks. file has highest priority even for 0th timeslot
-  for ( unsigned i = 0; i < E1_TS_NUM; i++ ) { 
+  for ( i = 0; i < E1_TS_NUM; i++ ) { 
     e1_tx_timeslot_t *t = &gl_e1_tx_ts[ i ];
 
     if ( t->file ) {
@@ -192,5 +194,5 @@ void e1_tx_set_file_for_timeslot( unsigned char ts, const char *fname )
 #ifdef DEBUG
   fprintf( stderr, "%s: ts%u = %s\n", __FUNCTION__, ts, fname );
 #endif
-  gl_e1_tx_ts[ ts ].fname = strdup( fname );
+  gl_e1_tx_ts[ ts ].fname = (const char*) strdup( fname );
 }

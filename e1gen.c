@@ -24,7 +24,8 @@ int main( int argc, char *argv[] )
       exit( err );
     }
 
-    for ( int i = 0; 
+    unsigned i = 0;
+    for ( i = 0; 
           ( i < gl_params.max_frames*E1_TS_NUM ) || ( gl_params.max_frames == 0 ); 
           i++ ) {
       unsigned char b = e1_tx_get_next_byte();
@@ -36,4 +37,6 @@ int main( int argc, char *argv[] )
   } else {
     exit( err );
   }
+
+  return 0;
 }
